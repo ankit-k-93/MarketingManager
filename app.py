@@ -1,5 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify, Response
 from flask_restful import Resource, Api, request
+from MarketingManager.models.dummy_models import DB
+
+# importing users data
+USERS = DB.get('USERS')
 
 app = Flask(__name__)
 api = Api(app)
@@ -10,21 +14,25 @@ def index():
     return render_template('index.html', name="ankit")
 
 
-class SimpleApi(Resource):
+class AllUsers(Resource):
     def get(self):
-        return {"message": "successful GET api"}
+        return USERS
 
 
-class SimplePostApi(Resource):
-    def post(self, id):
-        query_params = dict(request.args)
-        print(query_params)
-        return {"message": "successful POST api with id : {}".format(id)}
+class User(Resource):
+    def get(self, id):
+
+        for user in USERS:
+            if user.get('id') == id:
+
+                return jsonify(user)
+
+        return {"message": "No such user found"}, 404
 
 
-api.add_resource(SimpleApi, '/api/simple-api')
+api.add_resource(AllUsers, '/api/user')
+api.add_resource(User, '/api/user/<int:id>')
 
-api.add_resource(SimplePostApi, '/api/simple-post-api/<int:id>')
 
 if __name__=='__main__':
     app.run(host='0.0.0.0', port=4000)

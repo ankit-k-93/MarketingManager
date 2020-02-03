@@ -1,3 +1,44 @@
+* {
+box-sizing: border-box
+}
 header {
-    color: brown;
+    background: black;
+    color: white;
+    border: 1px solid black;
+    text-align:center;
+}
+section {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+.userSection {
+    display: flex;
+    flex-direction: row;
+}
+
+.userSection > input {
+    width: 100%;
+}
+
+#userTable {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#userTable td, #userTable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#userTable tr:nth-child(even){background-color: #f2f2f2;}
+
+#userTable tr:hover {background-color: #ddd;}
+
+#userTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
 }

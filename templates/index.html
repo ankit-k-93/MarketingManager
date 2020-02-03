@@ -9,15 +9,56 @@
 
     <script type="text/javascript" src="{{ url_for('static', filename = 'dashboard.js') }}"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'style.css') }}" media="screen" />
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous">
+    </script>
 </head>
 <body>
-    <header>Marketing Manager</header>
+<header><h1>Marketing Manager</h1></header>
+<section>
+    <div style="display:flex; display-direction:row;justify-content:space-between;background: #696969;
+    color: whitesmoke;
+    font-family: monospace;border: 2px solid whitesmoke;background: black;">
+        <div style="padding:1em">User: ankit</div>
+        <div style="padding:1em">Email: ankit8290@gmail.com</div>
+    </div>
+</section>
     <section>
-
+        <div class="userSection">
+            <input  style="cursor:pointer" type="button" onclick="get_all_users()" value="All Users">
+        </div>
+        <div id="display">
+          <div id="x">
+            <table id="userTable" style="display: none" onclick="get_user_details(event)">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
     </section>
 
     <section>
-
+        <div class="userSection">
+            <input  style="cursor:pointer" type="button" value="Design Template">
+        </div>
+        <div style="display: flex;flex-direction: row;width:100%; margin-top:1em">
+            <div style="flex:1">
+                <textarea id="template" contenteditable="true" name="" id="" cols="30" rows="10"></textarea>
+            </div>
+            <div id='open_ender_output' style="margin-left:1em; flex:4;border: 1px solid rgb(169, 169, 169)"></div>
+        </div>
+        <div>
+            <input type="button" onclick="executeHtml()" value="execute">
+            <input type="button" onclick="saveHtml()" value="save">
+        </div>
     </section>
 </body>
 </html>
