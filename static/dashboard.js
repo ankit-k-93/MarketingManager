@@ -7,7 +7,7 @@ function get_all_users(){
     }
 
     //call api//
-    fetch('http://0.0.0.0:4000/api/user').then(
+    fetch('http://192.168.24.253:4000/api/user').then(
         (response)=>{
             return response.json()
         }
@@ -73,7 +73,7 @@ function get_user_details(event) {
     });
 
    // call api //
-   fetch(`http://0.0.0.0:4000/api/user/${result[0]}`).then(
+   fetch(`http://192.168.24.253:4000/api/user/${result[0]}`).then(
         (response)=>{
             return response.json()
         }

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify, Response
-from flask_restful import Resource, Api, request
+from flask_restful import Resource, Api, request, reqparse
 from MarketingManager.models.dummy_models import DB
 
 # importing users data
@@ -30,7 +30,33 @@ class User(Resource):
         return {"message": "No such user found"}, 404
 
 
+class Template(Resource):
+    def __init__(self):
+        self.reqparse = reqparse.RequestParser()
+        self.reqparse.add_argument('template', type=str, required=True,
+            help='No template provided', location='json')
+        super(Template, self).__init__()
+
+    def post(self):
+        user = "ankit"
+        if not DB.get("TEMPLATES").get(user, None):
+            DB["TEMPLATES"][user] = []
+
+        args = self.reqparse.parse_args()
+        template = args.get("template")
+
+        DB.get("TEMPLATES").get(user).append(template)
+
+        return jsonify({"message": "successfully saved"})
+
+    def get(self):
+        user = "ankit"
+        print(request.headers.get('xyz'))
+        return jsonify(DB.get("TEMPLATES").get(user))
+
+
 api.add_resource(AllUsers, '/api/user')
+api.add_resource(Template, '/api/template/')
 api.add_resource(User, '/api/user/<int:id>')
 
 
